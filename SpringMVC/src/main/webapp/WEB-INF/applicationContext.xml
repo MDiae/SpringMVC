@@ -24,6 +24,8 @@
   <bean id="fileEventDao" class="com.devdaily.springtest1.dao.FileEventDao">
     <property name="dataSource" ref="basicDataSource"/>
   </bean>
+  
+  <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
   <bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
