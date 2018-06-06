@@ -33,7 +33,7 @@ public class UserController {
 		
 		if(userService.saveOrUpdate(users)) {
 			map.put("status", "200");
-			map.put("message", "Saved Successfully");
+			map.put("message", "Saved Successfully") ;
 		}
 		return map;
 	}
