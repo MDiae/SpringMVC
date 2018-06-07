@@ -29,9 +29,51 @@
 	<script type="text/javascript">
 		data = "";
 		submit = function() {
-			$
+			$.ajax({
+				url:'saveOrUpdate',
+				type:'POST',
+				data:{user_id:$("#user_id").val(), user_name:$("#name").val(), email_user:$("#email").val()},
+				success: function (response) {
+					alert(response.message);
+					load();
+					
+				}
+			});
+		}
 			
-		} 
+		delete = function(id) {
+			$.ajax({
+				url:'delete',
+				type:'POST',
+				data:{user_id:id}
+				success: function(response){
+					alert(response.message);
+					load();
+				}
+			});
+		}	
+		
+		edit = function(index) {
+			$("#user_id").val(data[index].user_id);
+			$("#name").val(data[index].user_name);
+			$("#email").val(data[index].email_user);
+		}
+		
+		load = function() {
+			$.ajax({
+				url:'list',
+				type:'POST',
+				success : function(response) {
+					data: response.data;
+					$('.tr').remove();
+					for(i=0; i<reponse.data.lengh; i++){
+						$("#table").append("<tr class='tr'> <td>"+response.data.user_name+ "</td> <td>"+response.data.email_user+"</td> <td><a href='#' onclick= edit("+i+");> Edit </a> </td> <td> <a href='#' onclick= 'delete_("+response.data.user_id+");'> Delete </a></td></tr>");
+					}
+				}
+			});
+			
+		}
+		
 	</script>
 </body>
 </html>
